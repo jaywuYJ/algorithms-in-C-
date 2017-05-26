@@ -29,6 +29,43 @@ namespace Algorithms
 
         }
 
+        public void InsertSearch()
+        {
+            //the outer loop visit all the elements in the array
+            for(int i=0;i<_intArray.Length-1;i++)
+            {
+                //the inner loop compare the visiting element in the outer loop with the sorted array
+                //and place the visiting element at the right position
+                //sln#1
+                // for(int j=i+1;j>0;j--)
+                // {
+                //     if(_intArray[j]<_intArray[j-1])
+                //       Swap(j,j-1);
+                //     else 
+                //       break;
+                // }
+
+                //sln#2 use while loop and swap the visiting element only once with the right position
+                int j=i+1; //visiting element is i+1
+                int position = i; // target position to swap 
+                while(j>0 && _intArray[j]<_intArray[j-1])
+                {
+                    position = j-1;
+                    j--;
+                }
+                Swap(i+1,position);
+            }
+            PrintArray(_intArray);
+
+        }
+
+        public void MergeSearch()
+        {
+
+        }
+        
+
+
         #region utils
         protected void PrintArray(int[] sorted)
         {
@@ -36,6 +73,7 @@ namespace Algorithms
             {
                 Console.Write(n.ToString()+",");
             }   
+            Console.WriteLine();
         }
 
         protected void Swap(int first, int second)
