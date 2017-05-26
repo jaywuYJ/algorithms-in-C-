@@ -2,17 +2,17 @@ using System;
 
 namespace Algorithms
 {
-    public class Search
+    public class Sort
     {
         private int[] _intArray;
 
-        private Search()
+        private Sort()
         {}
-        public Search(int[] unsorted)
+        public Sort(int[] unsorted)
         {
             _intArray = unsorted;
         }
-        public void SelectSearch()
+        public void SelectionSort()
         {
             for(int i=0;i<_intArray.Length;i++)
             {
@@ -29,7 +29,7 @@ namespace Algorithms
 
         }
 
-        public void InsertSearch()
+        public void InsertionSort()
         {
             //the outer loop visit all the elements in the array
             for(int i=0;i<_intArray.Length-1;i++)
@@ -59,7 +59,7 @@ namespace Algorithms
 
         }
 
-        public void MergeSearch()
+        public void MergeSort()
         {
 
         }
