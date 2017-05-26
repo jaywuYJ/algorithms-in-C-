@@ -1,0 +1,8 @@
+/Users/arkhanwu/Desktop/Programming/algorithms/bin/Debug/netcoreapp1.1/algorithms.deps.json
+/Users/arkhanwu/Desktop/Programming/algorithms/bin/Debug/netcoreapp1.1/algorithms.runtimeconfig.json
+/Users/arkhanwu/Desktop/Programming/algorithms/bin/Debug/netcoreapp1.1/algorithms.runtimeconfig.dev.json
+/Users/arkhanwu/Desktop/Programming/algorithms/bin/Debug/netcoreapp1.1/algorithms.dll
+/Users/arkhanwu/Desktop/Programming/algorithms/bin/Debug/netcoreapp1.1/algorithms.pdb
+/Users/arkhanwu/Desktop/Programming/algorithms/obj/Debug/netcoreapp1.1/algorithms.AssemblyInfo.cs
+/Users/arkhanwu/Desktop/Programming/algorithms/obj/Debug/netcoreapp1.1/algorithms.dll
+/Users/arkhanwu/Desktop/Programming/algorithms/obj/Debug/netcoreapp1.1/algorithms.pdb
