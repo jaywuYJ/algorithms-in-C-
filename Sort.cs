@@ -59,7 +59,7 @@ namespace Algorithms
 
         }
 
-        public void MergeSort()
+        public void ShellSort()
         {
 
         }
