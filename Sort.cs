@@ -177,7 +177,7 @@ namespace Algorithms
             }
 
 
-            //交换数据 must exchange, 
+            //交换数据 must exchange!!!
             //otherwise the new data will not be reflected on _intArray which is used in #1,2,3,4 in another method call
             for (int k = 0; k < tempLength; k++)
             {
@@ -198,6 +198,7 @@ namespace Algorithms
             {
                 for(int j = 0;j<_intArray.Length-groupSize;j+=2*groupSize)
                 {
+                    //use Math.Min because the j+2*groupSize-1 may goes out of index
                     merge(tempArray,j,j+groupSize-1,Math.Min(j+2*groupSize-1, _intArray.Length -1));
 
                 }
@@ -226,7 +227,6 @@ namespace Algorithms
 
             PrintArray(array);
         }
-
 
         private void Merge(int[] array, int[] temparray, int left, int middle, int right)
         {
