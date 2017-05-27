@@ -1,7 +1,6 @@
 ﻿using System;
-using Algorithms;
 
-namespace algorithms
+namespace Algorithms
 {
     class Program
     {
@@ -11,6 +10,11 @@ namespace algorithms
             var search = new Sort(unsorted);
             // search.SelectSearch();
             search.InsertionSort();
+            
+
+            var pm = new PatternMatch("I have a dog".ToCharArray(),"dog".ToCharArray());
+            
+            Console.WriteLine(pm.BruteForceMatch2());
 
             Console.WriteLine("Hello World!");
         }
