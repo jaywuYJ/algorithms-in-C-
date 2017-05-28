@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Algorithms
 {
@@ -14,10 +15,14 @@ namespace Algorithms
             // sort.RecursiveMergeSort();
             // sort.NonRecursiveMergeSort();
             // sort.MergeSort(unsorted,new int[unsorted.Length],0,unsorted.Length-1);
-            // sort.QuickSort(0,unsorted.Length-1);
-            sort.HeapSort();
+            // sort.HeapSort();
 
+            // var dict = new string[]{"a","b","how","to","solve","this","puzzle","?"};
+            sort.QuickSort(0, unsorted.Length - 1);
+            var binSearch = new BinarySearch<int>(sort.CurrentSequence);
+            int result = binSearch.Search(2, 0, sort.CurrentSequence.Length - 1);
 
+            Console.WriteLine(result.ToString());
             // var longest = new LongestPalindrome("my mum have a aabbaa cccbbabbcccd abba");
             // longest.GetLongestPalindrome1();
 

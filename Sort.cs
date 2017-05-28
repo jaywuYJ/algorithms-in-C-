@@ -12,6 +12,9 @@ namespace Algorithms
         {
             _intArray = unsorted;
         }
+
+        public int[] CurrentSequence { get { return _intArray; } }
+
         public void SelectionSort()
         {
             for (int i = 0; i < _intArray.Length; i++)
@@ -288,7 +291,7 @@ namespace Algorithms
                 int lt = low, i = low + 1, gt = high; //i always points to the element right to the comparables.
                 int comparable = _intArray[low];
                 //partition i such that a[lt..i-1] are equal to v and a[i..gt] are not yet examined
-                while (i <= gt) 
+                while (i <= gt)
                 {
                     int cmp = _intArray[i].CompareTo(comparable);
                     //the difference with QuickSort is that lt(gt) swap with i rather than gt(lt)
