@@ -280,6 +280,11 @@ namespace Algorithms
             }
         }
 
+        public void QuickSortSplitThree(int low, int high)
+        {
+            throw new NotImplementedException();
+        }
+
         private int partition(int low, int high)
         {
             int pivot = _intArray[low];
@@ -333,6 +338,25 @@ namespace Algorithms
             // }
             return j;
         }
+
+
+        public void HeapSort()
+        {
+            var heap = new Heap(_intArray.Length);
+            for(int i=0;i<_intArray.Length;i++)
+            {
+                heap.Insert(_intArray[i]);
+            }   
+            PrintArray(heap.GetHeap());
+            int[] sorted  = new int[_intArray.Length];
+            int j=sorted.Length-1;
+            while(!heap.IsEmpty())
+            {
+                sorted[j--]=heap.DelMax();
+            }
+            PrintArray(sorted);
+        }
+
 
         #region utils
 
