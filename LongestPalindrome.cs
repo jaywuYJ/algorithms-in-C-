@@ -5,6 +5,9 @@ namespace Algorithms
     public class LongestPalindrome
     {
         private char[] _content;
+
+        private LongestPalindrome()
+        {}
         public LongestPalindrome(string content)
         {
             _content = content.ToCharArray();
@@ -13,7 +16,8 @@ namespace Algorithms
         //the most straight forward way
         public void GetLongestPalindrome1()
         {
-            int left = 0, longest = 1;
+            //the output
+            int left = 0, longest = 1; //left : longest starting indext, longest: the longest length
 
             for (int i = 0; i < _content.Length; i++)
             {

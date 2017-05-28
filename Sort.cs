@@ -7,22 +7,22 @@ namespace Algorithms
         private int[] _intArray;
 
         private Sort()
-        {}
+        { }
         public Sort(int[] unsorted)
         {
             _intArray = unsorted;
         }
         public void SelectionSort()
         {
-            for(int i=0;i<_intArray.Length;i++)
+            for (int i = 0; i < _intArray.Length; i++)
             {
                 int min = i;
-                for(int j=i+1;j<_intArray.Length;j++)
+                for (int j = i + 1; j < _intArray.Length; j++)
                 {
-                    if(_intArray[j]<_intArray[min])
-                    min = j;
+                    if (_intArray[j] < _intArray[min])
+                        min = j;
                 }
-                Swap(i,min);
+                Swap(i, min);
             }
 
             PrintArray(_intArray);
@@ -32,7 +32,7 @@ namespace Algorithms
         public void InsertionSort()
         {
             //the outer loop visit all the elements in the array
-            for(int i=0;i<_intArray.Length-1;i++)
+            for (int i = 0; i < _intArray.Length - 1; i++)
             {
                 //the inner loop compare the visiting element in the outer loop with the sorted array
                 //and place the visiting element at the right position
@@ -46,14 +46,14 @@ namespace Algorithms
                 // }
 
                 //sln#2 use while loop and swap the visiting element only once with the right position
-                int j=i+1; //visiting element is i+1
+                int j = i + 1; //visiting element is i+1
                 int position = i; // target position to swap 
-                while(j>0 && _intArray[j]<_intArray[j-1])
+                while (j > 0 && _intArray[j] < _intArray[j - 1])
                 {
-                    position = j-1;
+                    position = j - 1;
                     j--;
                 }
-                Swap(i+1,position);
+                Swap(i + 1, position);
             }
             PrintArray(_intArray);
 
@@ -63,85 +63,85 @@ namespace Algorithms
         {
             int h = 0;
             //use h = 3*h+1 as the increment subsequence
-            while(h<=_intArray.Length/3)
+            while (h <= _intArray.Length / 3)
             {
                 h = 3 * h + 1;
             }
 
             //start shell sort
-            while (h>0)
+            while (h > 0)
             {
                 //outter loops index increase from group number 1 to ...
-                for(int group=0;group<h;group++) 
+                for (int group = 0; group < h; group++)
                 {
                     //insertion sort
-                    Console.WriteLine(@"group number{0}, current h is {1}",group, h);
-                    for(int i=h;i<_intArray.Length;i+=h)
+                    Console.WriteLine(@"group number{0}, current h is {1}", group, h);
+                    for (int i = h; i < _intArray.Length; i += h)
                     {
                         int j = i;
-                        while(j>=h &&_intArray[j]<_intArray[j-h])
+                        while (j >= h && _intArray[j] < _intArray[j - h])
                         {
-                            Swap(j,j-h);
+                            Swap(j, j - h);
                             PrintArray(_intArray);
-                            j-=h;
+                            j -= h;
                         }
                     }
-                    
+
                 }
-                h = h/3;
+                h = h / 3;
             }
-            
+
         }
 
         public void ShellSort2()
         {
             int h = 0;
             //use h = 3*h+1 as the increment subsequence
-            while(h<=_intArray.Length/3)
+            while (h <= _intArray.Length / 3)
             {
                 h = 3 * h + 1;
             }
 
             //start shell sort
-            while (h>=1)
+            while (h >= 1)
             {
                 //outter loops index increase from h until the last number
-                for(int i=h;i<_intArray.Length;i++) 
+                for (int i = h; i < _intArray.Length; i++)
                 {
 
-                    int j=h;
-                    while(j>=h&&_intArray[j]<_intArray[j-h])
+                    int j = h;
+                    while (j >= h && _intArray[j] < _intArray[j - h])
                     {
-                        Swap(j,j-h);
+                        Swap(j, j - h);
                     }
-                    
-                }
-                h = h/3;
-            }
-            
-        }
 
+                }
+                h = h / 3;
+            }
+
+        }
 
         public void RecursiveMergeSort()
         {
             int low = 0;
-            int high = _intArray.Length-1; //important, shoud be the larget index rather than the total number
+            int high = _intArray.Length - 1; //important, shoud be the larget index rather than the total number
 
             int[] temp = new int[_intArray.Length];
-            sort(temp,low,high);  
+            sort(temp, low, high);
 
             Console.WriteLine();
             PrintArray(_intArray);
         }
 
+        //used by MergeSort
         private void sort(int[] temp, int low, int high)
         {
-            if (low<high)
+            if (low < high)
             {
-                int mid = low + (high-low)/2;
-                sort(temp,low,mid);
-                sort(temp,mid+1,high);
-                merge(temp,low,mid,high);
+                int mid = low + (high - low) / 2;
+                sort(temp, low, mid);
+                sort(temp, mid + 1, high);
+                merge(temp, low, mid, high);
             }
             // else
             // {
@@ -149,29 +149,30 @@ namespace Algorithms
             // }
         }
 
+        //used by MergeSort
         private void merge(int[] temp, int low, int mid, int high)
         {
             //merge two sorted sub sequence, by comparing and putting the smaller ones in to the temp array.
             int i = low;
-            int j = mid+1;
+            int j = mid + 1;
             int tempIndex = low;
             int tempLength = high - low + 1;
-            while(i<=mid && j<=high) // <= is important, make sure each element is visited
+            while (i <= mid && j <= high) // <= is important, make sure each element is visited
             {
-                if (_intArray[i]<_intArray[j])
+                if (_intArray[i] < _intArray[j])
                     temp[tempIndex++] = _intArray[i++]; // #1 use latest _intArray data
                 else
                     temp[tempIndex++] = _intArray[j++]; // #2 use latest _intArray data
             }
 
             //exhaust the left part
-            while(i<=mid)
+            while (i <= mid)
             {
                 temp[tempIndex++] = _intArray[i++]; // #3 use latest _intArray data
             }
 
             //exhaust the right part
-            while(j<=high)
+            while (j <= high)
             {
                 temp[tempIndex++] = _intArray[j++]; // #4 use latest _intArray data
             }
@@ -188,18 +189,18 @@ namespace Algorithms
             }
 
             PrintArray(temp);
-            
+
         }
 
         public void NonRecursiveMergeSort()
         {
             int[] tempArray = new int[_intArray.Length];
-            for(int groupSize=1;groupSize<_intArray.Length;groupSize*=2)
+            for (int groupSize = 1; groupSize < _intArray.Length; groupSize *= 2)
             {
-                for(int j = 0;j<_intArray.Length-groupSize;j+=2*groupSize)
+                for (int j = 0; j < _intArray.Length - groupSize; j += 2 * groupSize)
                 {
                     //use Math.Min because the j+2*groupSize-1 may goes out of index
-                    merge(tempArray,j,j+groupSize-1,Math.Min(j+2*groupSize-1, _intArray.Length -1));
+                    merge(tempArray, j, j + groupSize - 1, Math.Min(j + 2 * groupSize - 1, _intArray.Length - 1));
 
                 }
             }
@@ -267,31 +268,88 @@ namespace Algorithms
                 right--;
             }
         }
-    
 
-        public void QuickSort()
+
+        public void QuickSort(int low, int high)
         {
-
+            if (low < high) //when low = high no need to partition and sort so don't use <=
+            {
+                int position = partition(low, high);
+                QuickSort(low, position - 1); //keypoint: do not include position into sub sequence
+                QuickSort(position + 1, high);
+            }
         }
 
-        
+        private int partition(int low, int high)
+        {
+            int pivot = _intArray[low];
+            int i = low, j = high + 1;
+            while (i < j) 
+            {
+                //use i < high to avoid index out of bounds of the array
+                while (i < high && _intArray[++i] < pivot) //use ++i to ensure that current i is the one that need to be swap
+                    if (i == j)
+                        break;
+
+                while (j > low && _intArray[--j] > pivot)
+                    if (i == j)
+                        break;
+
+                if (i < j)
+                {
+                    Swap(i, j);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //when i==j, swap the pivot with array[j]
+            if (_intArray[low] < _intArray[j])
+            {
+                j = j - 1;
+            }
+            Swap(low, j);
+
+            PrintArray(_intArray);
+
+            // for(int i=low+1;i<high-low+1;i++)
+            // {
+            //     for(int j=high;j>low;j--)
+            //     {
+            //         if (i!=j)
+            //         {
+            //             if(_intArray[i]<_intArray[low])
+            //             {
+            //                 i++;
+            //             }
+            //         }
+            //         else
+            //         {
+            //             pivot = j;
+            //         }
+            //     }
+
+            // }
+            return j;
+        }
 
         #region utils
 
-       
+
 
         protected void PrintArray(int[] sorted)
         {
-            foreach(var n in sorted)
+            foreach (var n in sorted)
             {
-                Console.Write(n.ToString()+",");
-            }   
+                Console.Write(n.ToString() + ",");
+            }
             Console.WriteLine();
         }
 
         protected void Swap(int first, int second)
         {
-            if(first != second)
+            if (first != second)
             {
                 int tmp = _intArray[first];
                 _intArray[first] = _intArray[second];
@@ -301,5 +359,5 @@ namespace Algorithms
         #endregion
 
     }
-    
+
 }

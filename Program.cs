@@ -14,8 +14,11 @@ namespace Algorithms
             // search.RecursiveMergeSort();
             // search.NonRecursiveMergeSort();
             // search.MergeSort(unsorted,new int[unsorted.Length],0,unsorted.Length-1);
-            var longest = new LongestPalindrome("my mum have a aabbaa cccbbabbcccd abba");
-            longest.GetLongestPalindrome1();
+            search.QuickSort(0,unsorted.Length-1);
+
+
+            // var longest = new LongestPalindrome("my mum have a aabbaa cccbbabbcccd abba");
+            // longest.GetLongestPalindrome1();
 
             var pm = new PatternMatch("I have a dog".ToCharArray(), "dog".ToCharArray());
 
