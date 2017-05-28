@@ -2,10 +2,10 @@ using System;
 
 namespace Algorithms
 {
-    public struct Heap
+    public class Heap
     {
-        int[] _queue;
-        int _currentLen;
+        protected int[] _queue;
+        protected int _currentLen;
         public Heap(int max)
         {
             _queue = new int[max + 1];
@@ -86,7 +86,7 @@ namespace Algorithms
             }
         }
 
-        private void Swap(int first, int second)
+        protected void Swap(int first, int second)
         {
             if (first <= _currentLen && second <= _currentLen)
             {
@@ -96,5 +96,72 @@ namespace Algorithms
             }
         }
 
+    }
+
+    public class PriorQueue<T> : Heap
+    {
+        public PriorQueue(int max) : base(max)
+        {
+        }
+
+
+        private void Swim(int n)
+        {
+            int k = n / 2; //k is the father node, given any node k(k>=2), its father node is k/2
+            while (k >= 1 && _queue[k].CompareTo(_queue[n]) < 0) //if father is valid && father is smaller than the new element
+            {
+                Swap(k, n);
+                n = k; //update the value
+                k = k / 2;
+            }
+        }
+
+        //v is not the index, but the previous last element 
+        private void Sink(int k)
+        {
+            while (2 * k <= _currentLen)
+            {
+                //Given any node k, its left son is 2k, and right son is 2k+1
+                int i = 2 * k;
+                if (i < _currentLen && _queue[i].CompareTo(_queue[i + 1]) < 0) // Key point: compare which child is bigger
+                    i++; //if the right child is bigger, then i = right child index
+
+                //compare with its bigger son
+                if (_queue[k].CompareTo(_queue[i]) < 0)
+                {
+                    Swap(k, i);
+                    k = i; //very important!!!
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+        }
+
+    }
+
+    public class Node : IComparable<Node>
+    {
+        public int Value { get; set; }
+        public int CompareTo(Node target)
+        {
+            int result = 0;
+            if (this.Value > target.Value)
+            {
+                result = 1;
+            }
+            else if (this.Value == target.Value)
+            {
+                result = 0;
+            }
+            else
+            {
+                result = -1;
+            }
+
+            return result;
+        }
     }
 }

@@ -282,14 +282,43 @@ namespace Algorithms
 
         public void QuickSortSplitThree(int low, int high)
         {
-            throw new NotImplementedException();
+            if (low < high)
+            {
+                //need 3 pointers
+                int lt = low, i = low + 1, gt = high; //i always points to the element right to the comparables.
+                int comparable = _intArray[low];
+                //partition i such that a[lt..i-1] are equal to v and a[i..gt] are not yet examined
+                while (i <= gt) 
+                {
+                    int cmp = _intArray[i].CompareTo(comparable);
+                    //the difference with QuickSort is that lt(gt) swap with i rather than gt(lt)
+                    //
+                    if (cmp > 0) //array[i] is less than comparable
+                    {
+                        Swap(i++, lt++); //swap and move on
+                    }
+                    else if (cmp < 0)
+                    {
+                        Swap(i, gt--); //i doesn't move because it needs to compare with comparable in the next round
+                    }
+                    else
+                    {
+                        i++; // i move on until array[i] doesn't equal with comparable
+                    }
+                }
+                //after partition, sort recursively
+                QuickSortSplitThree(low, lt - 1); //  lt such that a[lo..lt-1] is less than v
+                QuickSortSplitThree(gt + 1, high); // gt such that a[gt+1, hi] is greater than v
+
+            }
+
         }
 
         private int partition(int low, int high)
         {
             int pivot = _intArray[low];
             int i = low, j = high + 1;
-            while (i < j) 
+            while (i < j)
             {
                 //use i < high to avoid index out of bounds of the array
                 while (i < high && _intArray[++i] < pivot) //use ++i to ensure that current i is the one that need to be swap
@@ -343,17 +372,23 @@ namespace Algorithms
         public void HeapSort()
         {
             var heap = new Heap(_intArray.Length);
-            for(int i=0;i<_intArray.Length;i++)
+            //build up the heap
+            for (int i = 0; i < _intArray.Length; i++)
             {
                 heap.Insert(_intArray[i]);
-            }   
-            PrintArray(heap.GetHeap());
-            int[] sorted  = new int[_intArray.Length];
-            int j=sorted.Length-1;
-            while(!heap.IsEmpty())
-            {
-                sorted[j--]=heap.DelMax();
             }
+
+            PrintArray(heap.GetHeap());
+
+
+            int[] sorted = new int[_intArray.Length];
+            int j = sorted.Length - 1;
+            //get a sorted sequence
+            while (!heap.IsEmpty())
+            {
+                sorted[j--] = heap.DelMax();
+            }
+
             PrintArray(sorted);
         }
 
