@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ProblemSolving;
 
 namespace Algorithms
 {
@@ -18,11 +19,40 @@ namespace Algorithms
             // sort.HeapSort();
 
             // var dict = new string[]{"a","b","how","to","solve","this","puzzle","?"};
-            sort.QuickSort(0, unsorted.Length - 1);
-            var binSearch = new BinarySearch<int>(sort.CurrentSequence);
-            int result = binSearch.Search(2, 0, sort.CurrentSequence.Length - 1);
 
-            Console.WriteLine(result.ToString());
+            // sort.QuickSort(0, unsorted.Length - 1);
+            // var binSearch = new BinarySearch<int>(sort.CurrentSequence);
+            // int result = binSearch.Search(2, 0, sort.CurrentSequence.Length - 1);
+            // Console.WriteLine(result.ToString());
+
+            // var linkedList = new LinkedListSolution();
+            // var list1 = new ListNode(3);
+            // list1.next = new ListNode(1);
+            // list1.next.next = new ListNode(5);
+            // var list2 = new ListNode(5);
+            // list2.next = new ListNode(9);
+            // list2.next.next = new ListNode(2);
+
+            // var sum = linkedList.addLists(list1,list2);
+
+            // var stringHelper = new StringHelper();
+            // var result = stringHelper.ReverseWords("lak.kb c!gfbb' cgyxxrph!ai paim,izbj.tnkugjx.f!uhs!xgv vsx.ncydmsgeaenstgthzd'fv qssjheigf!xca!d ,tsvj!yni'csdnphtt cej.ngxy egnh oaxzxugnehorkqkt,");
+            // Console.WriteLine(result);
+
+            // var tmp = "         ";
+            // var a = tmp.Trim();
+            // Console.WriteLine(a);
+
+            var btn = new BinaryTreeNode(1);
+            btn.Left = new BinaryTreeNode(2);
+            btn.Right = new BinaryTreeNode(3);
+            btn.Left.Left = new BinaryTreeNode(4);
+            btn.Left.Right = new BinaryTreeNode(5);
+            btn.Left.Right.Left = new BinaryTreeNode(6);
+            btn.Left.Right.Right = new BinaryTreeNode(7);
+            var binaryTree = new BinaryTree(btn);
+            binaryTree.MirrorTree();
+
             // var longest = new LongestPalindrome("my mum have a aabbaa cccbbabbcccd abba");
             // longest.GetLongestPalindrome1();
 

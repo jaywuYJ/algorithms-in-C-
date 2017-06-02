@@ -1,13 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Algorithms
 {
+    //a max heap is a binary tree that each node has two childs, and both childs are smaller than the parent.
     public class Heap
     {
         protected int[] _queue;
         protected int _currentLen;
         public Heap(int max)
         {
+            //the binary tree is stored in an array that starts with array[1].
             _queue = new int[max + 1];
             _currentLen = 0;
         }
@@ -96,6 +100,16 @@ namespace Algorithms
             }
         }
 
+        public void PrintHeap()
+        {
+
+        }
+
+        public void MirrorHeap()
+        {
+
+        }
+
     }
 
     public class PriorQueue<T> : Heap
@@ -164,4 +178,64 @@ namespace Algorithms
             return result;
         }
     }
+
+
+    public class BinaryTreeNode : Node
+    {
+        public BinaryTreeNode Left { get; set; }
+        public BinaryTreeNode Right { get; set; }
+
+        public BinaryTreeNode(int val)
+        { this.Value = val; }
+
+    }
+
+    public class BinaryTree
+    {
+        BinaryTreeNode Root { get; set; }
+        public BinaryTree(BinaryTreeNode root)
+        {
+            this.Root = root;
+        }
+
+        //non-recursive mirror binary tree
+        public void MirrorTree()
+        {
+            Stack<BinaryTreeNode> s = new Stack<BinaryTreeNode>();
+            var currentNode = this.Root;
+            while (currentNode != null || s.Count != 0) // must have the '||' operator
+            {
+                while (currentNode != null)
+                {
+                    s.Push(currentNode);
+                    currentNode = currentNode.Left;
+                    PrintStack(s);
+                }
+                if (s.Count != 0)
+                {
+                    currentNode = s.Pop();
+                    
+                    var tmpNode = currentNode.Left;
+                    currentNode.Left = currentNode.Right;
+                    currentNode.Right = tmpNode;
+
+                    currentNode = currentNode.Left; //original right
+                    PrintStack(s);
+                }
+            }
+        }
+
+        private void PrintStack(Stack<BinaryTreeNode> s)
+        {
+            StringBuilder sbd = new StringBuilder();
+            foreach(var item in s)
+            {
+                sbd.Append(item.Value.ToString()+",");
+            }
+            Console.WriteLine(sbd.ToString());
+        }
+
+    }
+
+    
 }

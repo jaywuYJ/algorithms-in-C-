@@ -50,31 +50,32 @@ namespace Algorithms
 
                 //sln#2 use while loop and swap the visiting element only once with the right position
                 int j = i + 1; //visiting element is i+1
-                int position = i; // target position to swap 
+
                 while (j > 0 && _intArray[j] < _intArray[j - 1])
                 {
-                    position = j - 1;
+                    Swap(j, j - 1);
                     j--;
                 }
-                Swap(i + 1, position);
+
             }
             PrintArray(_intArray);
 
         }
 
+        //my initial understanding of shellsort, this implementation is not the best but easy to understand
         public void ShellSort()
         {
-            int h = 0;
+            int h = 1;
             //use h = 3*h+1 as the increment subsequence
-            while (h <= _intArray.Length / 3)
+            while (h < _intArray.Length / 3)
             {
                 h = 3 * h + 1;
             }
 
-            //start shell sort
-            while (h > 0)
+            //start shell sort, t he outer loop goes from largest h to 1 
+            while (h >= 1)
             {
-                //outter loops index increase from group number 1 to ...
+                //outter loops index increase from subgroup's first item 1 to 
                 for (int group = 0; group < h; group++)
                 {
                     //insertion sort
@@ -96,22 +97,24 @@ namespace Algorithms
 
         }
 
+        //this version is better than the first one, much clearer.
         public void ShellSort2()
         {
             int h = 0;
             //use h = 3*h+1 as the increment subsequence
-            while (h <= _intArray.Length / 3)
+            // Key point: smaller than the largest/3
+            // otherwise 3*h+1 may overflow for example, if the length is 15 and h<=15/3=5. then h = 3*5+1 = 16 overflows.
+            while (h < _intArray.Length / 3)
             {
                 h = 3 * h + 1;
             }
 
-            //start shell sort
+            //start shell sort, this outer loop goes from biggest h to 1
             while (h >= 1)
             {
-                //outter loops index increase from h until the last number
+                //outter loops index increase from h until the last number,
                 for (int i = h; i < _intArray.Length; i++)
                 {
-
                     int j = h;
                     while (j >= h && _intArray[j] < _intArray[j - h])
                     {
@@ -141,7 +144,7 @@ namespace Algorithms
         {
             if (low < high)
             {
-                int mid = low + (high - low) / 2;
+                int mid = low + (high - low) / 2; // or (low + high)/2 
                 sort(temp, low, mid);
                 sort(temp, mid + 1, high);
                 merge(temp, low, mid, high);
@@ -395,6 +398,54 @@ namespace Algorithms
             PrintArray(sorted);
         }
 
+
+        public void RadixSort()
+        {
+            int maxDigits = 1;
+            for (int i = 0; i < _intArray.Length; i++)
+            {
+                int currentMaxDigits = 1;
+                while (_intArray[i] / 10 != 0)
+                {
+                    currentMaxDigits++;
+                }
+                if (currentMaxDigits > maxDigits)
+                {
+                    maxDigits = currentMaxDigits;
+                }
+            }
+
+            //this is the outter loop, and for each loop, the given array would be resorted
+            for (int digit = 0; digit <= maxDigits; digit++)
+            {
+                int[,] buckets = new int[10, _intArray.Length];
+
+                for (int i = 0; i < _intArray.Length; i++)
+                {
+                    int currentdigit = (_intArray[i] / (int)Math.Pow(10, digit)) % 10;
+                    for (int j = 0; j < _intArray.Length; j++)
+                    {
+                        buckets[currentdigit, j] = _intArray[i];
+                    }
+
+                }
+
+                //in this inner loop, put all the items in the bucket back into the array, 
+                // after outter loop (all digits) finishes, the array will be a sorted sequence
+                for (int i = 0; i < _intArray.Length; i++)
+                {
+                    for (int index = 0, j = 0; j < _intArray.Length; j++)
+                    {
+                        if (buckets[i, j] != 0)
+                        {
+                            _intArray[index++] = buckets[i, j];
+                        }
+                    }
+                }
+
+            }
+
+        }
 
         #region utils
 
